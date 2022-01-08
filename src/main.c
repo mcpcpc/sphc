@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-#include "../include/mat.h"
+#include "include/mat.h"
 
 // https://www.codeproject.com/Articles/5283245/Matrix-Library-in-C
 // https://rosettacode.org/wiki/QR_decomposition#C
@@ -21,18 +21,19 @@ void show(mat m) {
 	printf("]\n");
 }
 
+
+
 int main(void) {
   int m = 3;
   int n = 2;
-  show(alloc(m, n));
-  show(randm(m, n));
-  show(eye(m));
+  printf("alloc(m,n):     "); show(alloc(m, n));
+  printf("eye(m):         "); show(eye(m));
   mat x = randm(m, m);
-  show(x);
-  transpose(x);
-  show(x);
-  show(gaussian_elimination(x));
-  printf("%f\n", det(x));
+  printf("x=randm(m,m):   "); show(x);
+  printf("transpose(x):   "); show(transpose(x));
+  printf("determinant(x): "); printf("%f\n", determinant(x));
+  printf("adjoint(x):     "); show(adjoint(x));
+	printf("inverse(x):     "); show(inverse(x));
   del(x);
 	return 0;
 }

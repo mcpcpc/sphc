@@ -1,4 +1,4 @@
-.POSIX:
+.POSIX:= 
 ALL_WARNING = -Wall -Wextra -pedantic
 ALL_LDFLAGS = $(LDFLAGS)
 ALL_CFLAGS = $(CPPFLAGS) $(CFLAGS) -std=c99 $(ALL_WARNING)
@@ -13,7 +13,7 @@ install: all
 	chmod 755 $(DESTDIR)$(BINDIR)/main
 main: main.o
 	$(CC) $(ALL_LDFLAGS) -o main main.o $(LDLIBS)
-main.o: src/main.c include/mat.h
+main.o: src/main.c src/include/mat.h
 	$(CC) $(ALL_CFLAGS) -c src/main.c
 clean:
 	rm -f main *.o
