@@ -144,21 +144,21 @@ double det(mat x) {
   if (x->m != x->n) exit(2);
   double d = 0;
   double r = 0;
-  mat c = duplicate(x);
-  // apply gaussian elimination
-  for (int i = 0; i < x->m; i++) {
-    for (int j = i + 1; j < x->m; j++) {
-      r = c->v[j][i] / c->v[j][i];
-      for (int k = 0; k < x->m; k++) {
-        c->v[j][k] = c->v[j][k] - (r * c->v[i][k]);
+  int i, j, k;
+  mat a = duplicate(x);
+  for(i = 0;i < x->n; i++) {
+    if(a->[i][i] == 0.0) exit(0);
+    for(j = i + 1; j < x->n; j++) {
+      r = a->v[j][i] / a->a[i][i];
+      for(k = 0; k < x->n; k++) {
+        a->v[j][k] = a->[j][k] - r*a->[i][k];
       }
     }
   }
-  // find determinant
-  for (int i = 0; i < x->m; i++) {
-    d = d * c->v[i][i];
+  for (i = 0; i < x->n; i++) {
+    d = d * a->v[i][i];
   }
-  del(c);
+  del(a);
   return d;
 }
 
