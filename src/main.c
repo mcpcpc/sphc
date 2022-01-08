@@ -21,8 +21,6 @@ void show(mat m) {
 	printf("]\n");
 }
 
-
-
 int main(void) {
   int m = 3;
   int n = 2;

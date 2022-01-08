@@ -10,6 +10,8 @@ typedef struct {
 	double ** v;
 } mat_t, *mat;
 
+//mat alloc(int m, int n);
+//void del(mat x);
 mat alloc(int m, int n) {
 	mat x = malloc(sizeof(mat_t));
 	x->v = malloc(sizeof(double*) * m);
@@ -148,18 +150,11 @@ void delm(mat x1, mat x2, int m){
   }	
 }
 
-void deln(mat x1, mat x2, int n) {	
-  //int k = 0;
-  //for(int i = 0; i < x1->m; i++){
-  //  for(int j = 0; j < x1->n; j++){
-  //    if(j != n) {
-  //      x2->v[k % x2->n][k / x2->n] = x1->v[i][j];				
-  //      k++;
+void deln(mat x1, mat x2, int n) {
   for(int i = 0; i < x2->m; i++) {
 		for(int j = 0; j < x2->n; j++) {
 			if(j < n) x2->v[i][j] = x1->v[i][j];
-			else x2->v[i][j] = x1->v[i][j+1];	
- //     }
+			else x2->v[i][j] = x1->v[i][j+1];
     }
   }	
 }
@@ -187,7 +182,7 @@ mat adjoint(mat x) {
   mat B = alloc(x->m, x->n);
   mat A1= alloc(x->m - 1, x->n);
   mat A2= alloc(x->m - 1, x->n - 1);
-  for (int i = 1; i < x->m; i++){
+  for (int i = 0; i < x->m; i++){
     delm(x, A1, i);
     for (int j = 0; j < x->n; j++){            
       deln(A1, A2, j);
@@ -206,49 +201,9 @@ mat inverse(mat x) {
   return y;
 }
 
-/*
-
-
-double det(mat x) {
-  if(x->m != x->n) exit(0);
-  double d = 0;
-  double sign = 1;
-  for(int i = 0; i < x->m; i++) {
-    mat y = cofactor();
-    d += sign * x[0][fi] * det(y);
-  }
-  return d;
-}
-
-
-mat gaussian_elimination(mat x) {
-  double r = 0;
-  mat y = duplicate(x);
-  for(int i = 0; i < x->n; i++) {
-    if(y->v[i][i] == 0.0) exit(0);
-    for(int j = i + 1; j < x->n; j++) {
-      r = y->v[j][i] / y->v[i][i];
-      for(int k = 0; k < x->n; k++) {
-        y->v[j][k] = y->v[j][k] - r*y->v[i][k];
-      }
-    }
-  }
-  return y;
-}
-
-double det(mat x) {
-  double d = 1.0;
-  if (x->m != x->n) exit(0);
-  for (int i = 0; i < x->m; i++) {
-    d *= x->v[i][i];
-  }
-  return d;
-}
-
 mat divide(mat x1, mat x2) {
 	mat y = multiply(x1, inverse(x2));
 	return y;
 }
 
-*/
 #endif
