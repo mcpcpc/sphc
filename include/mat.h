@@ -140,25 +140,29 @@ mat submat(mat x, int m1, int m2, int n1, int n2) {
     return y;
 }
 
-double det(mat x) {
-  if (x->m != x->n) exit(2);
-  double d = 0;
+mat gaussian_elimination(mat x) {
   double r = 0;
-  int i, j, k;
-  mat a = duplicate(x);
-  for(i = 0;i < x->n; i++) {
-    if(a->[i][i] == 0.0) exit(0);
-    for(j = i + 1; j < x->n; j++) {
-      r = a->v[j][i] / a->a[i][i];
-      for(k = 0; k < x->n; k++) {
-        a->v[j][k] = a->[j][k] - r*a->[i][k];
+  mat y = duplicate(x);
+  for(int i = 0; i < x->n; i++) {
+    if(y->v[i][i] == 0.0) exit(0);
+    for(int j = i + 1; j < x->n; j++) {
+      r = y->v[j][i] / y->v[i][i];
+      for(int k = 0; k < x->n; k++) {
+        y->v[j][k] = y->v[j][k] - r*y->v[i][k];
       }
     }
   }
-  for (i = 0; i < x->n; i++) {
-    d = d * a->v[i][i];
-  }
-  del(a);
+  return y;
+}
+
+double det(mat x) {
+  if (x->m != x->n) exit(0);
+  double d = 1;
+  mat y = gaussian_elimination(x);
+  for (int i = 0; i < x->n; i++) {
+    d = d * y->v[i][i];
+  }  
+  del(y);
   return d;
 }
 

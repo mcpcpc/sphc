@@ -31,6 +31,7 @@ int main(void) {
   show(x);
   transpose(x);
   show(x);
+  show(gaussian_elimination(x));
   printf("%f\n", det(x));
   del(x);
 	return 0;
