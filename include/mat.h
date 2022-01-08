@@ -67,7 +67,7 @@ mat copy(int n, double a[][n], int m) {
 	return x;
 }
 
-mat dupm(mat x) {
+mat duplicate(mat x) {
 	mat y = alloc(x->m, x->n);
 	for (int i = 0; i < x->m; i++) {
 		for (int j = 0; j < x->n; j++) {
@@ -144,10 +144,10 @@ double det(mat x) {
   if (x->m != x->n) exit(2);
   double d = 0;
   double r = 0;
-  mat c = dupm(x);
+  mat c = duplicate(x);
   // apply gaussian elimination
   for (int i = 0; i < x->m; i++) {
-    for (int j = 0; j < x->m; j++) {
+    for (int j = i + 1; j < x->m; j++) {
       r = c->v[j][i] / c->v[j][i];
       for (int k = 0; k < x->m; k++) {
         c->v[j][k] = c->v[j][k] - (r * c->v[i][k]);
@@ -155,7 +155,9 @@ double det(mat x) {
     }
   }
   // find determinant
-  for (int i = 0; i < x->m; i++) d *= c->v[i][i];
+  for (int i = 0; i < x->m; i++) {
+    d = d * c->v[i][i];
+  }
   del(c);
   return d;
 }
