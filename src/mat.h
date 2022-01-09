@@ -12,7 +12,7 @@ typedef struct MATRIX {
 } mat_t, *mat;
 
 typedef struct MATRIXLIST {
-  mat *v;
+	mat *v;
 } matlist_t, *matlist;
 
 mat alloc(int m, int n);
