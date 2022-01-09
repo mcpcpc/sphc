@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-#include "include/mat.h"
+#include "mat.h"
 
 // https://www.codeproject.com/Articles/5283245/Matrix-Library-in-C
 // https://rosettacode.org/wiki/QR_decomposition#C

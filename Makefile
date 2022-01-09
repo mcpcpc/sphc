@@ -1,22 +1,16 @@
-.POSIX:= 
+.POSIX:
 ALL_WARNING = -Wall -Wextra -pedantic
 ALL_LDFLAGS = $(LDFLAGS)
 ALL_CFLAGS = $(CPPFLAGS) $(CFLAGS) -std=c99 $(ALL_WARNING)
-PREFIX = /usr/local
 LDLIBS = -lm
-BINDIR = $(PREFIX)/bin
 
 all: main
-install: all
-	mkdir -p $(DESTDIR)$(BINDIR)
-	cp -f main $(DESTDIR)$(BINDIR)
-	chmod 755 $(DESTDIR)$(BINDIR)/main
-main: main.o
-	$(CC) $(ALL_LDFLAGS) -o main main.o $(LDLIBS)
-main.o: src/main.c src/include/mat.h
+main: main.o mat.o
+	$(CC) $(ALL_LDFLAGS) -o main main.o mat.o $(LDLIBS)
+main.o: src/main.c
 	$(CC) $(ALL_CFLAGS) -c src/main.c
+mat.o: src/mat.c src/mat.h
+	$(CC) $(ALL_CFLAGS) -c src/mat.c src/mat.h
 clean:
 	rm -f main *.o
-uninstall:
-	rm -f $(DESTDIR)$(BINDIR)/main
-.PHONY: all install uninstall clean
+.PHONY: all clean
