@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include "mat.h"
 #include "sph.h"
+#include "list.h"
 
 // https://www.codeproject.com/Articles/5283245/Matrix-Library-in-C
 // https://rosettacode.org/wiki/QR_decomposition#C
@@ -30,9 +31,13 @@ int main(void) {
   mat x = randm(m, m);
   printf("x=randm(m,m):   "); show(x);
   printf("transpose(x):   "); show(transpose(x));
-  printf("determinant(x): "); printf("%f\n", determinant(x));
-  printf("adjoint(x):     "); show(adjoint(x));
 	printf("inverse(x):     "); show(inverse(x));
-  del(x);
+  matlist xl = list_alloc();
+	xl->list_add(xl, x);
+	printf("list_get(0):    "); show(list_get(xl, 0));
+	xl->list_add(xl, randm(m,m));
+	printf("list_get(1):    "); show(list_get(xl, 1));	
+	list_del(xl);
+	del(x);
 	return 0;
 }

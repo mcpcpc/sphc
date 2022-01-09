@@ -10,10 +10,6 @@ typedef struct MATRIX {
 	double ** v;
 } mat_t, *mat;
 
-typedef struct MATRIXLIST {
-	mat *v;
-} matlist_t, *matlist;
-
 mat alloc(int m, int n);
 void del(mat x);
 mat eye(int m);
@@ -25,6 +21,7 @@ mat scale(mat x, double n);
 mat add(mat x1, mat x2);
 mat sub(mat x1, mat x2);
 mat power(mat x, double n);
+mat exponent(mat x, double n);
 mat multiply(mat x1, mat x2);
 mat submat(mat x, int m1, int m2, int n1, int n2);
 void delm(mat x1, mat x2, int m);

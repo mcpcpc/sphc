@@ -106,6 +106,16 @@ mat power(mat x, double n) {
 	return y;
 }
 
+mat exponent(mat x, double n) {
+	mat y = alloc(x->m, x->n);
+	for(int i = 0; i < x->m; i++) {
+		for(int j = 0; j < x->n; j++) {
+			y->v[i][j] = pow(n, x->v[i][j]);
+		}
+	}
+	return y;
+}
+
 mat multiply(mat x1, mat x2) {
 	if (x1->n != x2->m) return 0;
 	mat y = alloc(x1->m, x2->n);
