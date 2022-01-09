@@ -8,7 +8,6 @@
 typedef struct MATRIX {
 	int m, n;
 	double ** v;
-  //void * (*transpose)(struct MATRIX *self);
 } mat_t, *mat;
 
 typedef struct MATRIXLIST {
