@@ -16,7 +16,7 @@ static matlist
 gradw(mat x, mat y, mat z, double h)
 {
 	mat r = power(add(add(power(x ,2), power(y, 2)),
-	power(z, 2)), (1 / 2));
+		power(z, 2)), (1 / 2));
 	double c = -2 * pow(h, 5) / pow(M_PI, (3 / 2));
 	mat n = scale(exponent(scale(scale(power(r, 2), -1),
 		1 / h * h ), M_E), c);
@@ -154,7 +154,8 @@ sph_create(double dt, double h, double k, double n,
 	ptr->pos = pos0;
 	ptr->vel = vel0;
 	ptr->acc = acc0;
-	ptr->step = sph_step;
+	ptr->step = &sph_step;
+	ptr->run = &sph_run;
 	return ptr;
 }
 
