@@ -2,6 +2,7 @@
 #define __SPH_H
 
 #include "mat.h"
+#include "list.h"
 
 typedef struct SPH_MODEL {
     double dt;     // time step

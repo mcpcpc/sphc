@@ -5,8 +5,8 @@ ALL_CFLAGS = $(CPPFLAGS) $(CFLAGS) -std=c99 $(ALL_WARNING)
 LDLIBS = -lm
 
 all: clean main
-main: main.o mat.o list.o
-	$(CC) $(ALL_LDFLAGS) -o main main.o mat.o list.o $(LDLIBS)
+main: main.o mat.o list.o sph.o
+	$(CC) $(ALL_LDFLAGS) -o main main.o mat.o list.o sph.o $(LDLIBS)
 main.o: src/main.c
 	$(CC) $(ALL_CFLAGS) -c src/main.c
 sph.o: src/sph.c src/sph.h

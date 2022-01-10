@@ -13,9 +13,9 @@ static matlist gradw(mat x, mat y, mat z, double h) {
 	double c = -2 * pow(h, 5) / pow(M_PI, 3/2);
 	mat n = scale(exponent(scale(scale(power(r,2),-1),1/h*h),M_E),c);
 	matlist wxyz = list_alloc();
-	wxyz->add(wxyz, multiply(n,x));
-	wxyz->add(wxyz, multiply(n,y));
-	wxyz->add(wxyz, multiply(n,z));
+	wxyz->append(wxyz, multiply(n,x));
+	wxyz->append(wxyz, multiply(n,y));
+	wxyz->append(wxyz, multiply(n,z));
 	del(r);
 	del(n);
 	return wxyz;
@@ -31,7 +31,7 @@ static matlist pairwiseseparation(mat ri, mat rj) {
 	matlist dxyz = list_alloc();
 	dxyz->append(dxyz, sub(rix,transpose(rjx)));
 	dxyz->append(dxyz, sub(riy,transpose(rjy)));
-	dxyz->append(dxyz, sub(riz,transpose(rjz));
+	dxyz->append(dxyz, sub(riz,transpose(rjz)));
 	del(rix);
 	del(riy);
 	del(riz);
@@ -46,7 +46,7 @@ static mat density(mat r, mat pos, double m, double h) {
 	mat dw = w(dxyz->x[0], dxyz->x[0], dxyz->x[0], h);
 	mat rho = sum(scale(dw, m), 1);
 	del(dw);
-	listdel(dxyz);
+	list_del(dxyz);
 	return rho;
 }
 
@@ -63,7 +63,7 @@ static mat acceleration(mat pos, mat vel, double m, double h, double k, double n
 	mat ax = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[0]),m),1),-1);
 	mat ay = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[1]),m),1),-1);
 	mat az = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[2]),m),1),-1);
-	mat acc = sub(hstack(hstack(ax, ay), az)),add(scale(pos,l),scale(vel,nu)));
+	mat acc = sub(hstack(hstack(ax, ay), az),add(scale(pos,l),scale(vel,nu)));
 	del(rho);
 	del(p);
 	list_del(dxyz);
