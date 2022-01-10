@@ -4,9 +4,9 @@
 static mat
 w(mat dx, mat dy, mat dz, double h)
 {
+	double c = pow(1.0 / h * pow(M_PI, 1/2), 3);
 	mat r = power(add(add(power(dx, 2), power(dy, 2)), 
 		power(dz, 2)), (1 / 2));
-	double c = pow(1.0 / h * pow(M_PI, 1/2), 3);
 	mat w = scale(exponent(scale(power(r, 2),
 		1 / (h * h)), M_E), c);
 	destroy(r);
@@ -57,12 +57,10 @@ density(mat r, mat pos, double m, double h)
 {
 	matlist dxyz = pairwiseseparation(r, pos);
 	mat dw = w(dxyz->x[0], dxyz->x[0], dxyz->x[0], h);
-	//puts("make t"); mat t = scale(dw, m);
-	//printf("t: %d, %d\n", t->m, t->n);
-	//puts("density 3"); mat rho = sum(scale(dw, m), 1);
-	puts("density 3"); mat rho = scale(dw, m);
+	//mat rho = sum(scale(dw, m), 1);
+	printf("%f\n", dw->v[0]);
+	mat rho = scale(dw, m);
 	puts("density 4"); list_destroy(dxyz);
-	printf("dw: %d, %d\n", dw->m, dw->n);
 	//puts("density 5"); destroy(dw);
 	puts("density 6"); return rho;
 }

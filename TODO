@@ -1,0 +1,15 @@
+- [x] Matrix Library (src/mat.*)
+	- [x] mat_t struct
+	- [x] create
+	- [x] destroy
+- [x] Matrix Library (src/list.*)
+	- [x] matlist_t struct
+	- [x] create
+	- [x] destroy
+- [*] SPH Library (src/sph.*)
+	- [*] create
+	- [*] destroy
+- [ ] Other
+	- [ ] unit tests
+	- [ ] error handling
+	- [ ] OOC-like matrix handling 

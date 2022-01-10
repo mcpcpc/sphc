@@ -38,7 +38,13 @@ test_matrix(void)
   printf("x=randm(m,m):      "); show(x);
 	printf("submat(x,0,1,0,1): "); show(submat(x,0,1,0,1));	
   printf("transpose(x):      "); show(transpose(x));
+	printf("add(x,x):          "); show(add(x,x));
+	printf("sub(x,x):          "); show(sub(x,x));
+	printf("power(x,2):        "); show(power(x,2));
+	printf("exponent(x,2):     "); show(exponent(x,2));
 	printf("inverse(x):        "); show(inverse(x));
+	printf("multiply(x,x):     "); show(multiply(x,x));
+	printf("divide(x,x):       "); show(divide(x,x));
   matlist xl = list_create();
 	xl->append(xl, x);
 	printf("list_get(0):       "); show(xl->x[0]);
@@ -51,10 +57,9 @@ test_matrix(void)
 void
 test_sph(void)
 {
-	double pos[400][3] = {0};
-	random_list(400, 3, pos);
-	sph s = sph_create(0.04, 0.1, 0.1, 1.0, 1.0,
-		2/400, pos, 400);
+	double pos[100][3] = {0};
+	random_list(100, 3, pos);
+	sph s = sph_create(0.04, 0.1, 0.1, 1.0, 1.0, 2/100, pos, 100);
 	s->step(s);
 	sph_destroy(s);
 }
@@ -62,7 +67,7 @@ test_sph(void)
 int
 main(void)
 {
-	//test_matrix();
-	test_sph();
+	test_matrix();
+	//test_sph();
 	return 0;
 }

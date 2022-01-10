@@ -110,7 +110,7 @@ sub(mat x1, mat x2)
 	mat y = create(x1->m, x1->n);
 	for(int i = 0; i < x1->m; i++) {
 		for(int j = 0; j < x1->n; j++) {
-			y->v[i][j] = x1->v[i][j] + x2->v[i][j];
+			y->v[i][j] = x1->v[i][j] - x2->v[i][j];
 		}
 	}
 	return y;
