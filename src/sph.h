@@ -7,9 +7,8 @@
 #ifndef M_PI
 #define M_PI (3.14159265358979323846)
 #endif
-
 #ifndef M_E
-#define M_E (0.57721566490153286060)
+#define M_E  (0.57721566490153286060)
 #endif
 
 typedef struct SPH_MODEL {
@@ -25,11 +24,11 @@ typedef struct SPH_MODEL {
     mat    pos;
     mat    vel;
     mat    acc;
-    void (*init)(struct SPH_MODEL *self);
     void (*step)(struct SPH_MODEL *self);
 } sph_t, *sph;
 
-sph sph_alloc(double dt, double h, double k, double n,
+sph sph_create(double dt, double h, double k, double n,
 	double nu, double m, double pos[][3], int size);
+void sph_destroy(sph model);
 
 #endif

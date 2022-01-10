@@ -9,8 +9,8 @@ typedef struct MATRIX {
 	double ** v;
 } mat_t, *mat;
 
-mat alloc(int m, int n);
-void del(mat x);
+mat create(int m, int n);
+void destroy(mat x);
 mat eye(int m);
 mat randm(int m, int n);
 mat transpose(mat x);

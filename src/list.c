@@ -9,7 +9,7 @@ list_append(matlist xl, mat x)
 }
 
 matlist
-list_alloc(void)
+list_create(void)
 {
 	matlist xl = malloc(sizeof(matlist_t));
 	xl->n = 0;
@@ -18,9 +18,9 @@ list_alloc(void)
 }
 
 void
-list_del(matlist xl)
+list_destroy(matlist xl)
 {
-	for (int i = 0; i < xl->n; i++) del(xl->x[i]);
+	for (int i = 0; i < xl->n; i++) destroy(xl->x[i]);
 	free(xl->x);
 	free(xl);
 }

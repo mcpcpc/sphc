@@ -9,7 +9,7 @@ typedef struct MATRIX_LIST {
 	void (*append)(struct MATRIX_LIST *self, mat x);
 } matlist_t, *matlist;
 
-matlist list_alloc(void);
-void list_del(matlist xl);
+matlist list_create(void);
+void list_destroy(matlist xl);
 
 #endif
