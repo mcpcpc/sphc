@@ -1,6 +1,8 @@
 #include "mat.h"
 
-mat alloc(int m, int n) {
+mat
+alloc(int m, int n)
+{
 	mat x = malloc(sizeof(mat_t));
 	x->v = malloc(sizeof(double*) * m);
 	x->v[0] = calloc(sizeof(double), m * n);
@@ -12,13 +14,17 @@ mat alloc(int m, int n) {
 	return x;
 }
 
-void del(mat x) {
+void
+del(mat x)
+{
 	free(x->v[0]);
 	free(x->v);
 	free(x);
 }
 
-mat eye(int m) {
+mat
+eye(int m)
+{
 	mat x = alloc(m, m);
 	for(int i = 0; i < x->m; i++) {
 		x->v[i][i] = 1.0;
@@ -26,7 +32,9 @@ mat eye(int m) {
 	return x;
 }
 
-mat randm(int m, int n) {
+mat
+randm(int m, int n)
+{
 	mat x = alloc(m, n);
 	for(int i = 0; i < x->m; i++) {
 		for(int j = 0; j < x->n; j++) {
@@ -36,7 +44,9 @@ mat randm(int m, int n) {
 	return x;
 }
 
-mat transpose(mat x) {
+mat
+transpose(mat x)
+{
 	mat y = alloc(x->n, x->m);
 	for(int i = 0; i < x->m; i++) {
 		for(int j = 0; j < x->n; j++) {
@@ -46,7 +56,9 @@ mat transpose(mat x) {
 	return y;
 }
 
-mat copy(int n, double a[][n], int m) {
+mat
+copy(int n, double a[][n], int m)
+{
 	mat x = alloc(m, n);
 	for(int i = 0; i < m; i++) {
 		for(int j = 0; j < n; j++) {
@@ -56,7 +68,9 @@ mat copy(int n, double a[][n], int m) {
 	return x;
 }
 
-mat duplicate(mat x) {
+mat
+duplicate(mat x)
+{
 	mat y = alloc(x->m, x->n);
 	for(int i = 0; i < x->m; i++) {
 		for(int j = 0; j < x->n; j++) {
@@ -66,7 +80,9 @@ mat duplicate(mat x) {
 	return y;
 }
 
-mat scale(mat x, double n) {
+mat
+scale(mat x, double n)
+{
 	mat y = alloc(x->m, x->n);
 	for(int i = 0; i < x->m; i++) {
 		for(int j = 0; j < x->n; j++) {
@@ -76,7 +92,9 @@ mat scale(mat x, double n) {
 	return y;
 }
 
-mat add(mat x1, mat x2) {
+mat
+add(mat x1, mat x2)
+{
 	mat y = alloc(x1->m, x1->n);
 	for(int i = 0; i < x1->m; i++) {
 		for(int j = 0; j < x1->n; j++) {
@@ -86,7 +104,9 @@ mat add(mat x1, mat x2) {
 	return y;
 }
 
-mat sub(mat x1, mat x2) {
+mat
+sub(mat x1, mat x2)
+{
 	mat y = alloc(x1->m, x1->n);
 	for(int i = 0; i < x1->m; i++) {
 		for(int j = 0; j < x1->n; j++) {
@@ -96,7 +116,9 @@ mat sub(mat x1, mat x2) {
 	return y;
 }
 
-mat power(mat x, double n) {
+mat
+power(mat x, double n)
+{
 	mat y = alloc(x->m, x->n);
 	for(int i = 0; i < x->m; i++) {
 		for(int j = 0; j < x->n; j++) {
@@ -106,7 +128,9 @@ mat power(mat x, double n) {
 	return y;
 }
 
-mat exponent(mat x, double n) {
+mat
+exponent(mat x, double n)
+{
 	mat y = alloc(x->m, x->n);
 	for(int i = 0; i < x->m; i++) {
 		for(int j = 0; j < x->n; j++) {
@@ -116,7 +140,9 @@ mat exponent(mat x, double n) {
 	return y;
 }
 
-mat multiply(mat x1, mat x2) {
+mat
+multiply(mat x1, mat x2)
+{
 	if (x1->n != x2->m) return 0;
 	mat y = alloc(x1->m, x2->n);
 	for(int i = 0; i < x1->m; i++) {
@@ -129,7 +155,9 @@ mat multiply(mat x1, mat x2) {
 	return y;
 }
 
-mat submat(mat x, int m1, int m2, int n1, int n2) {
+mat
+submat(mat x, int m1, int m2, int n1, int n2)
+{
 	mat y = alloc(m2 - m1 + 1, n2 - n1 + 1);
 	for(int m = 0; m < y->m; m++) {
 		for(int n = 0; n < y->n; n++) {
@@ -139,16 +167,20 @@ mat submat(mat x, int m1, int m2, int n1, int n2) {
 	return y;
 }
 
-void delm(mat x1, mat x2, int m){	
+void
+delm(mat x1, mat x2, int m)
+{	
 	for(int i = 0; i < x2->m; i++) {
 		for(int j = 0; j < x2->n; j++) {
-			if(i < m) x2->v[i][j] = x1->v[i][j];
+			if (i < m) x2->v[i][j] = x1->v[i][j];
 			else x2->v[i][j] = x1->v[i+1][j];
 		}
 	}	
 }
 
-void deln(mat x1, mat x2, int n) {
+void
+deln(mat x1, mat x2, int n)
+{
 	for(int i = 0; i < x2->m; i++) {
 		for(int j = 0; j < x2->n; j++) {
 			if(j < n) x2->v[i][j] = x1->v[i][j];
@@ -157,7 +189,9 @@ void deln(mat x1, mat x2, int n) {
 	}	
 }
 
-double determinant(mat x) {
+double
+determinant(mat x)
+{
 	double d = 0;
 	if ((x->m == 1) && (x->n == 1)) {
 		d = x->v[0][0];
@@ -165,7 +199,7 @@ double determinant(mat x) {
 		double si = 1;
 		mat y1 = submat(x, 1, x->m - 1, 0, x->n -1);
 		mat y2 = alloc(y1->m, y1->n - 1);
-		for (int i = 0; i < x->n; i++) {
+		for(int i = 0; i < x->n; i++) {
 			deln(y1, y2, i);
 			d += si * determinant(y2) * x->v[i % x->n][i / x->n];
 			si *= -1;
@@ -176,13 +210,15 @@ double determinant(mat x) {
 	return d;
 }
 
-mat adjoint(mat x) {
+mat
+adjoint(mat x)
+{
 	mat B = alloc(x->m, x->n);
 	mat A1= alloc(x->m - 1, x->n);
 	mat A2= alloc(x->m - 1, x->n - 1);
-	for (int i = 0; i < x->m; i++){
+	for(int i = 0; i < x->m; i++){
 		delm(x, A1, i);
-		for (int j = 0; j < x->n; j++){            
+		for(int j = 0; j < x->n; j++){            
 			deln(A1, A2, j);
 			B->v[i][j] = determinant(A2) * (double)pow(-1, (double)(i+j));         
 		}
@@ -194,17 +230,23 @@ mat adjoint(mat x) {
 	return y;
 }
 
-mat inverse(mat x) {
+mat
+inverse(mat x)
+{
 	mat y = scale(adjoint(x),1/determinant(x));
 	return y;
 }
 
-mat divide(mat x1, mat x2) {
+mat
+divide(mat x1, mat x2)
+{
 	mat y = multiply(x1, inverse(x2));
 	return y;
 }
 
-mat sum(mat x, int axis) {
+mat
+sum(mat x, int axis)
+{
 	if (axis == 0) {
 		mat y = alloc(1, x->n);
 		for(int i = 0; i < x->m; i++) {
@@ -224,7 +266,9 @@ mat sum(mat x, int axis) {
 	} else exit(0);
 }
 
-mat vstack(mat x1, mat x2) {
+mat
+vstack(mat x1, mat x2)
+{
 	if (x1->n != x2->n) exit(0);
 	mat y = alloc(x1->m + x2->m, x1->n);
 	for(int i = 0; i < y->m; i++) {
@@ -236,7 +280,9 @@ mat vstack(mat x1, mat x2) {
 	return y;
 }
 
-mat hstack(mat x1, mat x2) {
+mat
+hstack(mat x1, mat x2)
+{
 	if (x1->m != x2->m) exit(0);
 	mat y = alloc(x1->m, x1->n + x2->n);
 	for(int i = 0; i < y->m; i++) {
@@ -247,4 +293,3 @@ mat hstack(mat x1, mat x2) {
 	}
 	return y;
 }
-

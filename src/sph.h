@@ -29,15 +29,7 @@ typedef struct SPH_MODEL {
     void (*step)(struct SPH_MODEL *self);
 } sph_t, *sph;
 
-sph sph_alloc(
-	double dt,
-	double h,
-	double k,
-	double n,
-	double nu,
-	double m,
-	double pos[][3],
-	int size
-);
+sph sph_alloc(double dt, double h, double k, double n,
+	double nu, double m, double pos[][3], int size);
 
 #endif

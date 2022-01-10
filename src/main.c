@@ -12,7 +12,9 @@
 // https://www.geeksforgeeks.org/determinant-of-a-matrix/
 // https://www.codesansar.com/c-programming-examples/matrix-determinant.htm
 
-void show(mat m) {
+void
+show(mat m)
+{
   printf("(%d,%d)->[\n", m->n, m->m);
 	for(int i = 0; i < m->m; i++) {
 		for(int j = 0; j < m->n; j++) {
@@ -23,7 +25,9 @@ void show(mat m) {
 	printf("]\n");
 }
 
-void random_list(int m, int n, double v[][n]) {
+void
+random_list(int m, int n, double v[][n])
+{
 	for(int i = 0; i < m; i++) {
 		for(int j = 0; j < n; j++) {
 			v[i][j] = (double)rand() / (double)RAND_MAX;
@@ -31,7 +35,9 @@ void random_list(int m, int n, double v[][n]) {
 	}
 }
 
-int main(void) {
+int
+main(void)
+{
   //int m = 3;
   //int n = 2;
   //printf("alloc(m,n):     "); show(alloc(m, n));
