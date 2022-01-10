@@ -4,6 +4,14 @@
 #include "mat.h"
 #include "list.h"
 
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
+
+#ifndef M_E
+#define M_E (0.57721566490153286060)
+#endif
+
 typedef struct SPH_MODEL {
     double dt;     // time step
     double t;      // current time
