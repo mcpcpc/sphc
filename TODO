@@ -2,6 +2,17 @@
 	- [x] mat_t struct
 	- [x] create
 	- [x] destroy
+	- [x] eye
+	- [x] randm
+	- [x] submat, x[m1:m2][n1:n2]
+	- [x] transpose, x.T
+	- [x] add, x1 + x2
+	- [x] sub, x1 - x2
+	- [x] power, x^y
+	- [x] exponent, y^x
+	- [x] inverse
+	- [x] multiply, x1 * x2
+	- [x] divide, x1 / x2
 - [x] Matrix Library (src/list.*)
 	- [x] matlist_t struct
 	- [x] create

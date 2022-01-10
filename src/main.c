@@ -47,9 +47,9 @@ test_matrix(void)
 	printf("divide(x,x):       "); show(divide(x,x));
   matlist xl = list_create();
 	xl->append(xl, x);
-	printf("list_get(0):       "); show(xl->x[0]);
+	printf("xl->[0]:           "); show(xl->x[0]);
 	xl->append(xl, randm(m,m));
-	printf("list_get(1):       "); show(xl->x[1]);	
+	printf("xl->[1]:           "); show(xl->x[1]);	
 	list_destroy(xl);
 	destroy(x);
 }
