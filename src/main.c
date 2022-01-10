@@ -4,14 +4,6 @@
 #include "list.h"
 #include "sph.h"
 
-// https://www.codeproject.com/Articles/5283245/Matrix-Library-in-C
-// https://rosettacode.org/wiki/QR_decomposition#C
-// https://rosettacode.org/wiki/Determinant_and_permanent#C
-// https://stackoverflow.com/questions/27003062/fastest-algorithm-for-computing-the-determinant-of-a-matrix
-// https://www.codewithc.com/c-program-for-lu-factorization/
-// https://www.geeksforgeeks.org/determinant-of-a-matrix/
-// https://www.codesansar.com/c-programming-examples/matrix-determinant.htm
-
 void
 show(mat m)
 {
