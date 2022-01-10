@@ -12,8 +12,7 @@ typedef struct SPH_MODEL {
     double n;      // polytropic index
     double nu;     // damping
     double l;      // lambda
-    double m;      // paricle masees
-    double r;      // particle radii
+    double m;      // particle masses
     int    size;   // number of particles
     mat    pos;
     mat    vel;

@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "mat.h"
 #include "list.h"
-//#include "sph.h"
+#include "sph.h"
 
 // https://www.codeproject.com/Articles/5283245/Matrix-Library-in-C
 // https://rosettacode.org/wiki/QR_decomposition#C
