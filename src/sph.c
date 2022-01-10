@@ -3,9 +3,11 @@
 static mat
 w(mat dx, mat dy, mat dz, double h)
 {
-	mat r = power(add(add(power(dx,2),power(dy,2)),power(dz,2)),1/2);
+	mat r = power(add(add(power(dx, 2), power(dy, 2)), 
+		power(dz, 2)), (1 / 2));
 	double c = pow(1.0 / h * pow(M_PI, 1/2), 3);
-	mat w = scale(exponent(scale(power(r, 2),1/(h*h)),M_E),c);
+	mat w = scale(exponent(scale(power(r, 2),
+		1 / (h * h)), M_E), c);
 	del(r);
 	return w;
 }
@@ -13,9 +15,11 @@ w(mat dx, mat dy, mat dz, double h)
 static matlist
 gradw(mat x, mat y, mat z, double h)
 {
-	mat r = power(add(add(power(x,2),power(y,2)),power(z,2)),1/2);
-	double c = -2 * pow(h, 5) / pow(M_PI, 3/2);
-	mat n = scale(exponent(scale(scale(power(r,2),-1),1/h*h),M_E),c);
+	mat r = power(add(add(power(x ,2), power(y, 2)),
+		power(z, 2)), (1 / 2));
+	double c = -2 * pow(h, 5) / pow(M_PI, (3 / 2));
+	mat n = scale(exponent(scale(scale(power(r, 2), -1),
+		1 / h * h ), M_E), c);
 	matlist wxyz = list_alloc();
 	wxyz->append(wxyz, multiply(n,x));
 	wxyz->append(wxyz, multiply(n,y));
@@ -72,11 +76,19 @@ acceleration(mat pos, mat vel, double m, double h,
 	mat rho = density(pos, pos, m, h);
 	mat p = pressure(rho, k, n);
 	matlist dxyz = pairwiseseparation(pos, pos);
-	matlist dwxyz = gradw(dxyz->x[0], dxyz->x[1], dxyz->x[2], h);
-	mat ax = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[0]),m),1),-1);
-	mat ay = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[1]),m),1),-1);
-	mat az = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[2]),m),1),-1);
-	mat acc = sub(hstack(hstack(ax, ay), az),add(scale(pos,l),scale(vel,nu)));
+	matlist dwxyz = gradw(dxyz->x[0], dxyz->x[1],
+		dxyz->x[2], h);
+	mat ax = scale(sum(scale(multiply(add(divide(p,
+		power(rho ,2)), divide(transpose(p), 
+		power(transpose(rho), 2))), dwxyz->x[0]), m), 1), -1);
+	mat ay = scale(sum(scale(multiply(add(divide(p, 
+		power(rho, 2)), divide(transpose(p),
+		power(transpose(rho), 2))), dwxyz->x[1]), m), 1), -1);
+	mat az = scale(sum(scale(multiply(add(divide(p,
+		power(rho, 2)), divide(transpose(p),
+		power(transpose(rho), 2))), dwxyz->x[2]), m), 1), -1);
+	mat acc = sub(hstack(hstack(ax, ay), az),
+		add(scale(pos, l), scale(vel, nu)));
 	del(rho);
 	del(p);
 	list_del(dxyz);
@@ -99,16 +111,8 @@ sph_step(sph m)
 {
 	m->vel = add(m->vel, scale(m->acc, m->dt/2));
 	m->pos = add(m->pos, scale(m->vel, m->dt));
-	m->acc = acceleration(
-		m->pos,
-		m->vel,
-		m->m,
-		m->h,
-		m->k,
-		m->l,
-		m->n,
-		m->nu
-	);
+	m->acc = acceleration(m->pos, m->vel, m->m, m->h,
+		m->k, m->l, m->n, m->nu);
 	m->vel = add(m->vel, scale(m->acc, m->dt/2));
 	m->t += m->dt;
 }
