@@ -25,6 +25,7 @@ typedef struct SPH_MODEL {
 	mat    vel;
 	mat    acc;
 	void (*step)(struct SPH_MODEL *self);
+	void (*run)(struct SPH_MODEL *self, double t_final);
 } sph_t, *sph;
 
 sph sph_create(double dt, double h, double k, double n,

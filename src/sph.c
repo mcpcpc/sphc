@@ -111,6 +111,14 @@ sph_step(sph model)
 	model->t += model->dt;
 }
 
+static void
+sph_run(sph model, double t_final)
+{
+	while (model->t < t_final) {
+		model->step(model);
+	}
+}
+
 sph
 sph_create(double dt, double h, double k, double n,
 	double nu, double m, double pos[][3], int size)
@@ -131,7 +139,8 @@ sph_create(double dt, double h, double k, double n,
 		.pos = pos0,
 		.vel = vel0,
 		.acc = acc0,
-		.step = &sph_step
+		.step = &sph_step,
+		.run = &sph_run
 	};
 	sph ptr = malloc(sizeof(model));
 	ptr->size = size;
