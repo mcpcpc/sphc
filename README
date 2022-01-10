@@ -1,8 +1,16 @@
 # sphc
 
-A smoothed particle hydrodynamics library written in C.
+A smoothed-particle hydrodynamics library written in POSIX C.
 
-## Install
+## Background
+
+Smoothed-particle hydrodynamics (SPH) is a computational method used for simulating the mechanics of continuum media, such as solid mechanics and fluid flows. It was developed by Gingold and Monaghan and Lucy in 1977, initially for astrophysical problems. It has been used in many fields of research, including astrophysics, ballistics, volcanology, and oceanography. It is a meshfree Lagrangian method (where the co-ordinates move with the fluid), and the resolution of the method can easily be adjusted with respect to variables such as density.
+
+# Install
+
+TBD.
+
+## Usage
 
 TBD.
 
@@ -10,18 +18,9 @@ TBD.
 
 Many thanks to Philip Mocz for his Medium article on smooth particle hydrodynamics and Roozbeh Abolpour for his example matrix math library article.
 
-## References
-
-// https://www.codeproject.com/Articles/5283245/Matrix-Library-in-C
-// https://rosettacode.org/wiki/QR_decomposition#C
-// https://rosettacode.org/wiki/Determinant_and_permanent#C
-// https://stackoverflow.com/questions/27003062/fastest-algorithm-for-computing-the-determinant-of-a-matrix
-// https://www.codewithc.com/c-program-for-lu-factorization/
-// https://www.geeksforgeeks.org/determinant-of-a-matrix/
-// https://www.codesansar.com/c-programming-examples/matrix-determinant.htm
-
 ## Contact
 
 For any further questions or concerns, feel free to email me at:
 
-	michaelczigler[at]mcpcpc[dot]com
+	Michael Czigler
+	info[at]mcpcpc[dot]com
