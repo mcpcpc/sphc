@@ -1,12 +1,11 @@
 # sphc
-
 A smoothed-particle hydrodynamics library written in POSIX C.
 
 ## Background
 
 Smoothed-particle hydrodynamics (SPH) is a computational method used for simulating the mechanics of continuum media, such as solid mechanics and fluid flows. It was developed by Gingold and Monaghan and Lucy in 1977, initially for astrophysical problems. It has been used in many fields of research, including astrophysics, ballistics, volcanology, and oceanography. It is a meshfree Lagrangian method (where the co-ordinates move with the fluid), and the resolution of the method can easily be adjusted with respect to variables such as density.
 
-# Install
+## Install
 
 TBD.
 
@@ -16,7 +15,7 @@ TBD.
 
 ## Credit
 
-Many thanks to Philip Mocz for his Medium article on smooth particle hydrodynamics and Roozbeh Abolpour for his example matrix math library article.
+Many thanks to Philip Mocz for his Medium article on SPH and Roozbeh Abolpour for his example matrix math library article.
 
 ## Contact
 
