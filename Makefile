@@ -9,6 +9,7 @@ main: main.o mat.o list.o sph.o
 	$(CC) $(ALL_LDFLAGS) -o main main.o mat.o list.o sph.o $(LDLIBS)
 main.o: src/main.c
 	$(CC) $(ALL_CFLAGS) -c src/main.c
+
 sph.o: src/sph.c src/sph.h
 	$(CC) $(ALL_CFLAGS) -c src/sph.c src/sph.h
 mat.o: src/mat.c src/mat.h

@@ -1,5 +1,5 @@
 - [x] Matrix Library (src/mat.*)
-	- [x] mat_t struct
+	- [x] typedef mat_t
 	- [x] create
 	- [x] destroy
 	- [x] eye
@@ -15,13 +15,22 @@
 	- [x] divide, x1 / x2
 	- [x] pairwise distance
 - [x] Matrix Library (src/list.*)
-	- [x] matlist_t struct
+	- [x] typedef matlist_t
 	- [x] create
 	- [x] destroy
-- [*] SPH Library (src/sph.*)
-	- [*] create
-	- [*] destroy
+- [x] SPH Library (src/sph.*)
+	- [x] typedef sph_t
+	- [x] create
+		- [x] step
+		- [x] run
+	- [x] destroy
+- [x] ASCII Simulator (src/sim.*)
+	- [x] typedef sim_t
+	- [*] init
+	- [*] run
+	- [ ] finish
 - [ ] Other
+	- [ ] man pages
 	- [ ] unit tests
 	- [ ] error handling
 	- [ ] OOC-like matrix handling 
