@@ -203,3 +203,47 @@ mat divide(mat x1, mat x2) {
 	mat y = multiply(x1, inverse(x2));
 	return y;
 }
+
+mat sum(mat x, int axis) {
+	if (axis == 0) {
+		mat y = alloc(1, x->n);
+		for(int i = 0; i < x->m; i++) {
+			for(int j = 0; j < x->n; j ++) {
+				y->v[1][j] += x->v[i][j];
+			}
+		}
+	} else if (axis == 1) {
+		mat y = alloc(x->m, 1);
+		for(int i = 0; i < x->m; i++) {
+			for(int j = 0; j < x->n; j ++) {
+				y->v[i][1] += x->v[i][j];
+			}
+		}
+	} else exit(0);
+	return y;
+}
+
+mat vstack(mat x1, mat x2) {
+	if (x1->n != x2->n) exit(0);
+	mat y = alloc(x1->m + x2->m, x1->n);
+	for(int i = 0; i < y->m; i++) {
+		for(int j = 0; j < y->n; j++) {
+			if (i < x1->m) y->v[i][j] = x1->v[i][j];
+			else y->v[i][j] = x2->v[i - x1->m][j];
+		}
+	}
+	return y;
+}
+
+mat hstack(mat x1, mat x2) {
+	if (x1->m != x2->m) exit(0);
+	mat y = alloc(x1->m, x1->n + x2->n);
+	for(int i = 0; i < y->m; i++) {
+		for(int j = 0; j < y->n; j++) {
+			if (j < x1->n) y->v[i][j] = x1->v[i][j];
+			else y->v[i][j] = x2->v[i][j - x1->n];
+		}
+	}
+	return y;
+}
+
