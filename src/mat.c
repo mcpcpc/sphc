@@ -293,3 +293,26 @@ hstack(mat x1, mat x2)
 	}
 	return y;
 }
+
+mat
+distance(mat x1, mat x2) {
+	if ((x1->n == 1) && (x1->m == x2->n)) {
+		mat y = create(x1->m, x1->m);
+		for (int i = 0; i < x1->m; i++) {
+			for (int j = 0; j < x2->n; j++) {
+				y->v[i][j] = x1->v[i][0] - x2->v[0][j];
+			}
+		}
+		return y;
+	}
+	if ((x1->m == 1) && (x1->n == x2->m)) {
+		mat y = create(x1->n, x1->n);
+		for (int i = 0; i < x1->n; i++) {
+			for (int j = 0; j < x2->m; j++) {
+				y->v[i][j] = x1->v[0][i] - x2->v[j][0];
+			}
+		}
+		return y;
+	}
+	exit(0);
+}

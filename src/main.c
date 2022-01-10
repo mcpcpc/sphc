@@ -45,6 +45,7 @@ test_matrix(void)
 	printf("inverse(x):        "); show(inverse(x));
 	printf("multiply(x,x):     "); show(multiply(x,x));
 	printf("divide(x,x):       "); show(divide(x,x));
+	printf("distance(x,x):     "); show(distance(submat(x,0,2,0,0),transpose(submat(x,0,2,0,0))));
   matlist xl = list_create();
 	xl->append(xl, x);
 	printf("xl->[0]:           "); show(xl->x[0]);
@@ -67,7 +68,7 @@ test_sph(void)
 int
 main(void)
 {
-	test_matrix();
-	//test_sph();
+	//test_matrix();
+	test_sph();
 	return 0;
 }

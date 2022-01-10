@@ -10,9 +10,10 @@
 	- [x] sub, x1 - x2
 	- [x] power, x^y
 	- [x] exponent, y^x
-	- [x] inverse
+	- [x] inverse, I(x)
 	- [x] multiply, x1 * x2
 	- [x] divide, x1 / x2
+	- [x] pairwise distance
 - [x] Matrix Library (src/list.*)
 	- [x] matlist_t struct
 	- [x] create

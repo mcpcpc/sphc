@@ -16,22 +16,22 @@ w(mat dx, mat dy, mat dz, double h)
 static matlist
 gradw(mat x, mat y, mat z, double h)
 {
-	mat r = power(add(add(power(x ,2), power(y, 2)),
+	puts("gradw 1"); mat r = power(add(add(power(x ,2), power(y, 2)),
 		power(z, 2)), (1 / 2));
-	double c = -2 * pow(h, 5) / pow(M_PI, (3 / 2));
-	mat n = scale(exponent(scale(scale(power(r, 2), -1),
+	puts("gradw 2"); double c = -2 * pow(h, 5) / pow(M_PI, (3 / 2));
+	puts("gradw 3"); mat n = scale(exponent(scale(scale(power(r, 2), -1),
 		1 / h * h ), M_E), c);
-	matlist wxyz = list_create();
-	wxyz->append(wxyz, multiply(n,x));
-	wxyz->append(wxyz, multiply(n,y));
-	wxyz->append(wxyz, multiply(n,z));
-	destroy(r);
-	destroy(n);
+	puts("gradw 4"); matlist wxyz = list_create();
+	puts("gradw 5"); wxyz->append(wxyz, multiply(n, x));
+	puts("gradw 6"); wxyz->append(wxyz, multiply(n, y));
+	puts("gradw 7"); wxyz->append(wxyz, multiply(n, z));
+	puts("gradw 8"); destroy(r);
+	puts("gradw 9"); destroy(n);
 	return wxyz;
 }
 
 static matlist
-pairwiseseparation(mat ri, mat rj)
+pairwise_separation(mat ri, mat rj)
 {
 	mat rix = submat(ri, 0, ri->m - 1, 0, 0);
 	mat riy = submat(ri, 0, ri->m - 1, 1, 1);
@@ -40,29 +40,34 @@ pairwiseseparation(mat ri, mat rj)
 	mat rjy = submat(rj, 0, rj->m - 1, 1, 1);
 	mat rjz = submat(rj, 0, rj->m - 1, 2, 2);
 	matlist dxyz = list_create();
-	dxyz->append(dxyz, sub(rix,rjx));
-	dxyz->append(dxyz, sub(riy,rjy));
-	dxyz->append(dxyz, sub(riz,rjz));
+	mat dx = distance(rix,transpose(rjx));
+	mat dy = distance(rix,transpose(rjx));
+	mat dz = distance(rix,transpose(rjx));
+	puts("test1"); dxyz->append(dxyz, dx);
+	puts("test2"); dxyz->append(dxyz, dy);
+	puts("test3"); dxyz->append(dxyz, dz);
 	destroy(rix);
 	destroy(riy);
 	destroy(riz);
 	destroy(rjx);
 	destroy(rjy);
 	destroy(rjz);
+	destroy(dx);
+	destroy(dy);
+	destroy(dz);
 	return dxyz;
 
 }
 static mat
 density(mat r, mat pos, double m, double h)
 {
-	matlist dxyz = pairwiseseparation(r, pos);
-	mat dw = w(dxyz->x[0], dxyz->x[0], dxyz->x[0], h);
+	matlist dxyz = pairwise_separation(r, pos);
+	mat dw = w(dxyz->x[0], dxyz->x[1], dxyz->x[2], h);
 	//mat rho = sum(scale(dw, m), 1);
-	printf("%f\n", dw->v[0]);
 	mat rho = scale(dw, m);
-	puts("density 4"); list_destroy(dxyz);
-	//puts("density 5"); destroy(dw);
-	puts("density 6"); return rho;
+	list_destroy(dxyz);
+	destroy(dw);
+	return rho;
 }
 
 static mat
@@ -76,29 +81,29 @@ static mat
 acceleration(mat pos, mat vel, double m, double h,
 	double k, double n, double l, double nu)
 {
-	puts("acceleration 0"); mat rho = density(pos, pos, m, h);
+	mat rho = density(pos, pos, m, h);
 	mat p = pressure(rho, k, n);
-	puts("acceleration 2"); matlist dxyz = pairwiseseparation(pos, pos);
+	matlist dxyz = pairwise_separation(pos, pos);
 	puts("acceleration 3"); matlist dwxyz = gradw(dxyz->x[0], dxyz->x[1],
 		dxyz->x[2], h);
-	mat ax = scale(sum(scale(multiply(add(divide(p,
-		power(rho ,2)), divide(transpose(p), 
+	puts("acceleration 4"); mat ax = scale(sum(scale(multiply(add(divide(p,
+		power(rho, 2)), divide(transpose(p), 
 		power(transpose(rho), 2))), dwxyz->x[0]), m), 1), -1);
-	mat ay = scale(sum(scale(multiply(add(divide(p, 
+	puts("acceleration 5"); mat ay = scale(sum(scale(multiply(add(divide(p, 
 		power(rho, 2)), divide(transpose(p),
 		power(transpose(rho), 2))), dwxyz->x[1]), m), 1), -1);
-	mat az = scale(sum(scale(multiply(add(divide(p,
+	puts("acceleration 6"); mat az = scale(sum(scale(multiply(add(divide(p,
 		power(rho, 2)), divide(transpose(p),
 		power(transpose(rho), 2))), dwxyz->x[2]), m), 1), -1);
-	mat acc = sub(hstack(hstack(ax, ay), az),
+	puts("acceleration 7"); mat acc = sub(hstack(hstack(ax, ay), az),
 		add(scale(pos, l), scale(vel, nu)));
-	destroy(rho);
-	destroy(p);
-	list_destroy(dxyz);
-	list_destroy(dwxyz);
-	destroy(ax);
-	destroy(ay);
-	destroy(az);
+	puts("acceleration 8"); destroy(rho);
+	puts("acceleration 9"); destroy(p);
+	puts("acceleration 10"); list_destroy(dxyz);
+	puts("acceleration 11"); list_destroy(dwxyz);
+	puts("acceleration 12"); destroy(ax);
+	puts("acceleration 13"); destroy(ay);
+	puts("acceleration 14"); destroy(az);
 	return acc;
 }
 

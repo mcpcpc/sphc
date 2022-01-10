@@ -32,5 +32,6 @@ mat divide(mat x1, mat x2);
 mat sum(mat x, int axis);
 mat vstack(mat x1, mat x2);
 mat hstack(mat x1, mat x2);
+mat distance(mat x1, mat x2);
 
 #endif
