@@ -212,6 +212,7 @@ mat sum(mat x, int axis) {
 				y->v[1][j] += x->v[i][j];
 			}
 		}
+		return y;
 	} else if (axis == 1) {
 		mat y = alloc(x->m, 1);
 		for(int i = 0; i < x->m; i++) {
@@ -219,8 +220,8 @@ mat sum(mat x, int axis) {
 				y->v[i][1] += x->v[i][j];
 			}
 		}
+		return y;
 	} else exit(0);
-	return y;
 }
 
 mat vstack(mat x1, mat x2) {

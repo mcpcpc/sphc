@@ -21,7 +21,7 @@ typedef struct SPH_MODEL {
     void * (*step)(struct SPH_MODEL *self);
 } sph_t, *sph;
 
-void init(sph m);
-void step(sph m);
+void sph_init(sph m);
+void sph_step(sph m);
 
 #endif
