@@ -58,9 +58,9 @@ test_matrix(void)
 void
 test_sph(void)
 {
-	double pos[100][3] = {0};
-	random_list(100, 3, pos);
-	sph s = sph_create(0.04, 0.1, 0.1, 1.0, 1.0, 2/100, pos, 100);
+	double pos[50][3] = {0};
+	random_list(50, 3, pos);
+	sph s = sph_create(0.04, 0.1, 0.1, 1.0, 1.0, 2/50, pos, 50);
 	s->step(s);
 	sph_destroy(s);
 }

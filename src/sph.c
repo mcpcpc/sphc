@@ -4,12 +4,12 @@
 static mat
 w(mat dx, mat dy, mat dz, double h)
 {
-	double c = pow(1.0 / h * pow(M_PI, 1/2), 3);
-	mat r = power(add(add(power(dx, 2), power(dy, 2)), 
+	puts("w 1"); double c = pow(1.0 / h * pow(M_PI, 1/2), 3);
+	puts("w 2"); mat r = power(add(add(power(dx, 2), power(dy, 2)), 
 		power(dz, 2)), (1 / 2));
-	mat w = scale(exponent(scale(power(r, 2),
+	puts("w 3"); mat w = scale(exponent(scale(power(r, 2),
 		1 / (h * h)), M_E), c);
-	destroy(r);
+	puts("w 4"); destroy(r);
 	return w;
 }
 
@@ -40,33 +40,27 @@ pairwise_separation(mat ri, mat rj)
 	mat rjy = submat(rj, 0, rj->m - 1, 1, 1);
 	mat rjz = submat(rj, 0, rj->m - 1, 2, 2);
 	matlist dxyz = list_create();
-	mat dx = distance(rix,transpose(rjx));
-	mat dy = distance(rix,transpose(rjx));
-	mat dz = distance(rix,transpose(rjx));
-	puts("test1"); dxyz->append(dxyz, dx);
-	puts("test2"); dxyz->append(dxyz, dy);
-	puts("test3"); dxyz->append(dxyz, dz);
+	dxyz->append(dxyz, distance(rix,transpose(rjx)));
+	dxyz->append(dxyz, distance(riy,transpose(rjy)));
+	dxyz->append(dxyz, distance(riz,transpose(rjz)));
 	destroy(rix);
 	destroy(riy);
 	destroy(riz);
 	destroy(rjx);
 	destroy(rjy);
 	destroy(rjz);
-	destroy(dx);
-	destroy(dy);
-	destroy(dz);
 	return dxyz;
 
 }
 static mat
 density(mat r, mat pos, double m, double h)
 {
-	matlist dxyz = pairwise_separation(r, pos);
-	mat dw = w(dxyz->x[0], dxyz->x[1], dxyz->x[2], h);
+	puts("density 0"); matlist dxyz = pairwise_separation(r, pos);
+	puts("density 1"); mat dw = w(dxyz->x[0], dxyz->x[1], dxyz->x[2], h);
 	//mat rho = sum(scale(dw, m), 1);
-	mat rho = scale(dw, m);
-	list_destroy(dxyz);
-	destroy(dw);
+	puts("density 2"); mat rho = scale(dw, m);
+	puts("density 3"); list_destroy(dxyz);
+	puts("density 4"); destroy(dw);
 	return rho;
 }
 
@@ -81,9 +75,9 @@ static mat
 acceleration(mat pos, mat vel, double m, double h,
 	double k, double n, double l, double nu)
 {
-	mat rho = density(pos, pos, m, h);
-	mat p = pressure(rho, k, n);
-	matlist dxyz = pairwise_separation(pos, pos);
+	puts("acceleration 0"); mat rho = density(pos, pos, m, h);
+	puts("acceleration 1"); mat p = pressure(rho, k, n);
+	puts("acceleration 2"); matlist dxyz = pairwise_separation(pos, pos);
 	puts("acceleration 3"); matlist dwxyz = gradw(dxyz->x[0], dxyz->x[1],
 		dxyz->x[2], h);
 	puts("acceleration 4"); mat ax = scale(sum(scale(multiply(add(divide(p,
