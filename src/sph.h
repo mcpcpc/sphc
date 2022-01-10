@@ -17,11 +17,19 @@ typedef struct SPH_MODEL {
     mat    pos;
     mat    vel;
     mat    acc;
-    void * (*init)(struct SPH_MODEL *self);
-    void * (*step)(struct SPH_MODEL *self);
+    void (*init)(struct SPH_MODEL *self);
+    void (*step)(struct SPH_MODEL *self);
 } sph_t, *sph;
 
-void sph_init(sph m);
-void sph_step(sph m);
+sph sph_alloc(
+	double dt,
+	double h,
+	double k,
+	double n,
+	double nu,
+	double m,
+	double pos[][3],
+	int size
+);
 
 #endif

@@ -29,9 +29,9 @@ static matlist pairwiseseparation(mat ri, mat rj) {
 	mat rjy = submat(rj, 0, rj->m - 1, 1, 1);
 	mat rjz = submat(rj, 0, rj->m - 1, 2, 2);
 	matlist dxyz = list_alloc();
-	dxyz->add(dxyz, sub(rix,transpose(rjx)));
-	dxyz->add(dxyz, sub(riy,transpose(rjy)));
-	dxyz->add(dxyz, sub(riz,transpose(rjz));
+	dxyz->append(dxyz, sub(rix,transpose(rjx)));
+	dxyz->append(dxyz, sub(riy,transpose(rjy)));
+	dxyz->append(dxyz, sub(riz,transpose(rjz));
 	del(rix);
 	del(riy);
 	del(riz);
@@ -55,17 +55,17 @@ static mat pressure(mat rho, double k, double n) {
 	return p;
 }
 
-static mat acceleration(mat pos, mat vel, double m, double h, double k, double l, double n, double nu) {
+static mat acceleration(mat pos, mat vel, double m, double h, double k, double n, double l, double nu) {
 	mat rho = density(pos, pos, m, h);
 	mat p = pressure(rho, k, n);
 	matlist dxyz = pairwiseseparation(pos, pos);
 	matlist dwxyz = gradw(dxyz->x[0], dxyz->x[1], dxyz->x[2], h);
-	mat ax = scale(sum(scale(multiply(add(div(p,power(rho,2)),div(transform(p),power(transform(rho),2))),dwxyz->x[0]),m),1),-1);
-	mat ax = scale(sum(scale(multiply(add(div(p,power(rho,2)),div(transform(p),power(transform(rho),2))),dwxyz->x[1]),m),1),-1);
-	mat ay = scale(sum(scale(multiply(add(div(p,power(rho,2)),div(transform(p),power(transform(rho),2))),dwxyz->x[2]),m),1),-1);
-	mat acc = hstack(hstack(ax, ay), az);
+	mat ax = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[0]),m),1),-1);
+	mat ay = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[1]),m),1),-1);
+	mat az = scale(sum(scale(multiply(add(divide(p,power(rho,2)),divide(transpose(p),power(transpose(rho),2))),dwxyz->x[2]),m),1),-1);
+	mat acc = sub(hstack(hstack(ax, ay), az)),add(scale(pos,l),scale(vel,nu)));
 	del(rho);
-	del(pressure);
+	del(p);
 	list_del(dxyz);
 	list_del(dwxyz);
 	del(ax);
@@ -80,8 +80,8 @@ static void sph_init(sph m) {
 }
 
 static void sph_step(sph m) {
-	m->vel = add(m->vel, scale(m->acc, dt/2));
-	m->pos = add(m->pos, scale(m->vel, dt));
+	m->vel = add(m->vel, scale(m->acc, m->dt/2));
+	m->pos = add(m->pos, scale(m->vel, m->dt));
 	m->acc = acceleration(
 		m->pos,
 		m->vel,
@@ -92,11 +92,11 @@ static void sph_step(sph m) {
 		m->n,
 		m->nu
 	);
-	m->vel = add(m->vel, scale(m->acc, dt/2));
+	m->vel = add(m->vel, scale(m->acc, m->dt/2));
 	m->t += m->dt;
 }
 
-sph sph_alloc(double dt, double h, double k, double n, double nu, double *m, double pos[][3], int size) {
+sph sph_alloc(double dt, double h, double k, double n, double nu, double m, double pos[][3], int size) {
 	sph model = malloc(sizeof(sph));
 	model->dt = dt;
 	model->h = h;
