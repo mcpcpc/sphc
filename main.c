@@ -65,10 +65,19 @@ test_sph(void)
 	puts("sph_destroy"); sph_destroy(s);
 }
 
+void
+test_sim(void)
+{
+	double pos[10][3] = {0};
+	random_list(10, 3, pos);
+	sph s = sph_create(0.04, 0.1, 0.1, 1.0, 1.0, 2/10, pos, 10);
+}
+
 int
 main(void)
 {
 	//test_matrix();
-	test_sph();
+	//test_sph();
+	test_sim();
 	return 0;
 }
