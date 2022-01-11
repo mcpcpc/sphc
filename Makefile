@@ -14,9 +14,4 @@ mat.o: mat.c mat.h
 list.o: list.c list.h
 clean:
 	rm -f main *.o
-
-.SUFFIXES: .c .o
-.c.o:
-	$(CC) $(CFLAGS) -c $<
-
 .PHONY: all clean
